@@ -1,0 +1,98 @@
+@charset "utf-8";
+
+/* ------------------------------------------------------------
+main image style
+------------------------------------------------------------ */
+#mainImage p {
+	margin-top: 0;
+}
+#main {
+	width: 928px;
+	margin: 0;
+	padding: 0 16px;
+	overflow: hidden;
+}
+#mainText {
+	float: left;
+	width: 564px;
+	margin-right: 16px;
+}
+
+/* ------------------------------------------------------------
+information style
+------------------------------------------------------------ */
+#information h2 {
+	padding-left: 43px;
+	background-image: url(../images/ico_information.gif);
+	background-position: 9px 10px;
+	background-repeat: no-repeat;
+}
+#information table {
+	width: 928px;
+	margin: 0 auto 1em;
+	border-collapse: separate;
+	border-spacing: 0;
+	border-top: 1px solid #999;
+	border-left: 1px solid #999;
+}
+#information th {
+	width: 19%;
+	padding: 3px 9px;
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
+	background-color: #EEEEEE;
+	text-align: left;
+}
+#information td {
+	width: 31%;
+	padding: 3px 9px;
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+
+/* ------------------------------------------------------------
+sub photo style
+------------------------------------------------------------ */
+#subPhoto h2 {
+	padding-left: 49px;
+	background-image: url(../images/ico_camera.gif);
+	background-position: 9px 10px;
+	background-repeat: no-repeat;
+}
+#subPhoto .contents {
+	clear: both;
+	margin-left: 16px;
+	overflow: hidden;
+}
+#subPhoto .inner {
+	float: left;
+	width: 300px;
+	margin-right: 14px;
+}
+
+/* ------------------------------------------------------------
+map access style
+------------------------------------------------------------ */
+#mapAccess h2 {
+	padding-left: 44px;
+	background-image: url(../images/ico_compass.gif);
+	background-position: 9px 10px;
+	background-repeat: no-repeat;
+}
+#mapAccess .contents {
+	width: 928px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+#map {
+	float: left;
+	width: 564px;
+	margin-right: 16px;
+}
+
+/* ------------------------------------------------------------
+another contents style
+------------------------------------------------------------ */
+#anotherContents {
+	padding: 0 16px;
+}

@@ -1,0 +1,79 @@
+@charset "utf-8";
+
+/* ------------------------------------------------------------
+common style
+------------------------------------------------------------ */
+body {
+	margin: 0;
+	padding: 0;
+	background: #FFD412 url(../images/bg_body.gif);
+	font-family: Verdana, "游ゴシック", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+	line-height: 1.61;
+	-webkit-text-size-adjust: 100%;
+}
+
+#wrapper {
+	width: 960px;
+	margin: 0 auto;
+	border-right: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	background-color: #FFF;
+}
+
+/* ------------------------------------------------------------
+header style
+------------------------------------------------------------ */
+header {
+	width: 928px;
+	margin: 0;
+	padding: 0 16px;
+	background-color: #006221;
+	overflow: hidden;
+}
+header h1 {
+	width: 320px;
+	float: left;
+	margin-right: 0;
+	margin-bottom: 8px;
+}
+header p {
+	float: right;
+	color: #FFF;
+}
+
+/* ------------------------------------------------------------
+contents style
+------------------------------------------------------------ */
+#contents {
+	clear: both;
+	width: 960px;
+	margin: 0;
+	padding: 0;
+	background-color: #FFF;
+	overflow: hidden;
+}
+#contents p, #contents h2 {
+	margin-top: 0;
+}
+#contents h2 {
+	padding: 6px 10px 9px;
+	background-color: #DF0024;
+	color: #FFF;
+	font-size: 125%;
+}
+
+/* ------------------------------------------------------------
+footer style
+------------------------------------------------------------ */
+footer {
+	clear: both;
+	width: 928px;
+	margin: 0;
+	padding: 0 16px;
+	background-color: #006221;
+	overflow: hidden;
+}
+footer p {
+	color: #FFF;
+	text-align: center;
+}

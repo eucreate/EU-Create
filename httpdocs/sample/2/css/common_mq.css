@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+@media screen and (max-width: 596px) {
+/* ------------------------------------------------------------
+common style
+------------------------------------------------------------ */
+	#wrapper {
+		width: auto;
+		border: 0;
+	}
+
+/* ------------------------------------------------------------
+header style
+------------------------------------------------------------ */
+	header {
+		width: auto;
+		overflow: auto;
+	}
+	header h1 {
+		width: auto;
+		float: none;
+		margin-right: 0;
+		margin-bottom: 9px;
+	}
+	header h1 img {
+		max-width: 100%;
+		height: auto;
+	}
+	header p {
+		float: none;
+	}
+
+	/* ------------------------------------------------------------
+	contents style
+	------------------------------------------------------------ */
+	#contents {
+		width: auto;
+		overflow: hidden;
+	}
+
+	/* ------------------------------------------------------------
+	footer style
+	------------------------------------------------------------ */
+	footer {
+		clear: both;
+		width: auto;
+		overflow: auto;
+	}
+}
