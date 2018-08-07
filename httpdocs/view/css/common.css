@@ -1,0 +1,71 @@
+@charset "utf-8";
+
+/* ------------------------------------------------------------
+common style
+------------------------------------------------------------ */
+body {
+	margin: 0;
+	padding: 0;
+	background: #FFF;
+	color: #111114;
+	font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+	line-height: 1.61;
+	-webkit-text-size-adjust: 100%;
+}
+a img {
+	border: none;
+}
+h2 {
+	color: #F60;
+}
+
+/* ------------------------------------------------------------
+header style
+------------------------------------------------------------ */
+#headerUpper {
+	background: #EEEEEE;
+}
+#headerUnder {
+	background: #06C;
+}
+#headerUpperInner,
+#headerUnderInner {
+	max-width: 992px;
+	margin: 0 auto;
+}
+header p {
+	margin: 0;
+	padding: 0 16px;
+}
+header h1 {
+	margin: 0;
+	padding: 16px 16px 0;
+}
+header h1 img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* ------------------------------------------------------------
+contents style
+------------------------------------------------------------ */
+#contents {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 0 16px;
+}
+#othersInfo {
+	font-size: 75%;
+}
+
+/* ------------------------------------------------------------
+footer style
+------------------------------------------------------------ */
+footer {
+	padding: 0 16px;
+	border-top: 3px solid #DDDDDD;
+}
+#footerInner {
+	max-width: 960px;
+	margin: 0 auto;
+}
