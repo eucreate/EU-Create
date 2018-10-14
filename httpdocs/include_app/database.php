@@ -1,24 +1,48 @@
 <?php
+/**
+ * PDO Database Access Class
+ * 
+ * @copyright EU-Create All Rights Reserved.
+ * @auther EU-Create <eucreate@gmail.com>
+ */
+
 //========================================================================================================
 // PDOデータベース接続
 //========================================================================================================
-class db {
+class dbc {
 	public $isConnected;
 	public $cHostName;
 	public $cUserName;
 	public $cPassword;
 	public $cDatabase;
+	public $cSqlitePath;
+	public $cSqliteName;
+	public $cDbType;
 	public $cCon;
-	function __construct($realPathPrivate, $dbDatabase=dbName) {
+	public $cSqliteRelativePath;
+	function __construct($sqliteRelativePath="") {
 		$this->cHostName = dbServer;
 		$this->cUserName = dbUser;
 		$this->cPassword = dbPass;
-		$this->cDatabase = $dbDatabase;
+		$this->cDatabase = dbName;
+		$this->cSqlitePath = sqlitePath;
+		$this->cSqliteName = dbSqlite;
+		$this->cDbType = dbType;
+		$this->cSqliteRelativePath = $sqliteRelativePath;
 		//データベースへ接続
 		try {
 			$this->isConnected = true;
-			//SQLite
-			$this->cCon = new PDO("sqlite:{$realPathPrivate}{$this->cHostName}");
+			if ($this->cDbType === "sqlite") {
+				//SQLite
+				$this->cCon = new PDO("sqlite:{$this->cSqliteRelativePath}{$this->cSqlitePath}{$this->cSqliteName}");
+			} else if ($this->cDbType === "MySQL") {
+				//MySQL
+				if (version_compare(PHP_VERSION. '5.3.6', '>=')) {
+					$this->cCon = new PDO("mysql:dbname=$this->cDatabase;host=$this->cHostName;charset=utf8", $this->cUserName, $this->cPassword, array(PDO::ATTR_EMULATE_PREPARES=>false));
+				} else {
+					$this->cCon = new PDO("mysql:dbname=$this->cDatabase;host=$this->cHostName", $this->cUserName, $this->cPassword, array(PDO::ATTR_EMULATE_PREPARES=>false, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+				}
+			}
 		} catch(PDOException $e) { 
 			$this->isConnected = false;
 			throw new Exception($e->getMessage());
@@ -29,8 +53,8 @@ class db {
 	//---------------------------
 	function getRowOnce($query) {
 		try {
-			return $this->cCon->query($query);
-//			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt = $this->cCon->query($query);
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		} catch(PDOException $e) {
 			throw new Exception($e->getMessage());
 		}
@@ -38,10 +62,19 @@ class db {
 	//---------------------------
 	// 検索結果
 	//---------------------------
-	function getRow($query, $params=array()) {
+	function getRow($query, $params=array(), $type=array()) {
 		try {
 			$stmt = $this->cCon->prepare($query);
-			$stmt->execute($params);
+			if (count($type) > 0) {
+				for ($i = 0; $i < count($type); $i++) {
+					$j = $i + 1;
+					$paramType = $this->retParamType($type[$i]);
+					$stmt->bindValue($j, $params[$i], $paramType);
+				}
+				$stmt->execute();
+			} else {
+				$stmt->execute($params);
+			}
 			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		} catch(PDOException $e) {
 			throw new Exception($e->getMessage());
@@ -73,19 +106,29 @@ class db {
 	//---------------------------
 	// INSERT, UPDATE, DELETE
 	//---------------------------
-	public function insertRow($query, $params){
+	public function insertRow($query, $params, $type=array()){
 		try{
 			$stmt = $this->cCon->prepare($query);
-			$stmt->execute($params);
+			if (count($type) > 0) {
+				for ($i = 0; $i < count($type); $i++) {
+					$j = $i + 1;
+					$paramType = $this->retParamType($type[$i]);
+					$stmt->bindValue($j, $params[$i], $paramType);
+				}
+				$stmt->execute();
+			} else {
+				$stmt->execute($params);
+			}
+			return intval($this->cCon->lastInsertId());
 		}catch(PDOException $e){
 			throw new Exception($e->getMessage());
 		}
 	}
-	public function updateRow($query, $params){
-		return $this->insertRow($query, $params);
+	public function updateRow($query, $params, $type=array()){
+		return $this->insertRow($query, $params, $type=array());
 	}
-	public function deleteRow($query, $params){
-		return $this->insertRow($query, $params);
+	public function deleteRow($query, $params, $type=array()){
+		return $this->insertRow($query, $params, $type=array());
 	}
 	//---------------------------
 	// INSERT, UPDATE, DELETE(ONCE)
@@ -114,5 +157,23 @@ class db {
 	//---------------------------
 	function Disconnect() {
 		$this->cCon = null;
+	}
+	
+	//---------------------------
+	// bindのデータ型
+	//---------------------------
+	public function retParamType($type) {
+		switch ($type) {
+			case "PARAM_NULL":
+				$paramType = PDO::PARAM_NULL;
+				break;
+			case "PARAM_INT":
+				$paramType = PDO::PARAM_INT;
+				break;
+			case "PARAM_STR":
+				$paramType = PDO::PARAM_STR;
+				break;
+		}
+		return $paramType;
 	}
 }
