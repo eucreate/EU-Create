@@ -51,8 +51,8 @@ if (isset($_GET["mode"]) && $_GET["mode"] === "delete") {
 		}
 		//ページ名が登録済みかチェック
 		if (isset($_POST["name"]) && $_POST["name"] != "" && $_POST["name"] != $_POST["nameOld"]) {
-			$sqlCheck = "SELECT COUNT(*) FROM pages WHERE pageType = ? AND name LIKE ?";
-			$paramCheck = array($_POST["pageType"], $_POST["name"]);
+			$sqlCheck = "SELECT COUNT(*) FROM pages WHERE pageType = ? AND pagesCategoryID = ? AND name LIKE ?";
+			$paramCheck = array($_POST["pageType"], $_POST["pagesCategoryID"], $_POST["name"]);
 			$rowsCheck = $db->getRowSelect($sqlCheck, $paramCheck);
 			if ($rowsCheck > 0) {
 				$errorMessage = array("name" => "ページ名「".htmlspecialchars($_POST["name"])."」は登録済みです。");
@@ -80,6 +80,9 @@ if (isset($_GET["mode"]) && $_GET["mode"] === "delete") {
 	$pageTitle .= "（完了）";
 	include_once($realPath."admin/".$viewDir."/".$fileName."End".$viewFileExt);
 } elseif (isset($_GET["mode"]) && $_GET["mode"] === "new") {
+	//カテゴリー取得
+	$categoriesSql = "SELECT * FROM pagesCategories";
+	$categoriesResult = $db->getRowOnce($categoriesSql);
 	//新規登録
 	$errorMessage = array();
 	//ページ名が入力されているかチェック
@@ -88,8 +91,8 @@ if (isset($_GET["mode"]) && $_GET["mode"] === "delete") {
 	}
 	//ページ名が登録済みかチェック
 	if (isset($_POST["name"]) && $_POST["name"] != "") {
-		$sqlCheck = "SELECT COUNT(*) FROM pages WHERE name LIKE ?";
-		$paramCheck = array(htmlspecialchars($_POST["name"]));
+		$sqlCheck = "SELECT COUNT(*) FROM pages WHERE pagesCategoriesID = ? AND name LIKE ?";
+		$paramCheck = array($_POST["pagesCategoryID"], htmlspecialchars($_POST["name"]));
 		$rowsCheck = $db->getRowSelect($sqlCheck, $paramCheck);
 		if ($rowsCheck > 0) {
 			$errorMessage = array("name" => "ページ名「".htmlspecialchars($_POST["name"])."」は登録済みです。");
@@ -104,7 +107,7 @@ if (isset($_GET["mode"]) && $_GET["mode"] === "delete") {
 		}
 		ini_set("max_execution_time",180);
 		$sqlInsert = "INSERT INTO pages(name, title, header, contents, status, created, phpScript, type, pagesCategoriesID) VALUES(?, ?, ?, ?, ?, datetime('now', '+09:00:00'), ?, ?, ?)";
-		$paramInsert = array($_POST["name"], $_POST["title"], $_POST["header"], $_POST["formContents"], $_POST["status"], $phpScript, (int)$_POST["pageType"], (int)$_POST["pagesCategoriesID"]);
+		$paramInsert = array($_POST["name"], $_POST["title"], $_POST["header"], $_POST["formContents"], $_POST["status"], $phpScript, (int)$_POST["pageType"], (int)$_POST["pagesCategoryID"]);
 		$db->insertRow($sqlInsert, $paramInsert);
 		header("Location: /admin/pages.php?mode=end");
 		exit;

@@ -25,15 +25,21 @@ if (array_key_exists("pages", $qs) === false && count($qs) === 0) {
 	$pages = "";
 }
 
+if (isset($_GET["categoriesName"])) {
+	$pagesCategory = htmlspecialchars($_GET["categoriesName"]);
+} else {
+	$pagesCategory = "top";
+}
+
 $db = new dbc();
 if (isset($_GET["preview"]) && (int)$_GET["preview"] === 1) {
-	$getPagesSql = "SELECT * FROM pages WHERE name = ? AND type = ?";
-	$getPagesRow = "SELECT COUNT(*) FROM pages WHERE name = ? AND type = ?";
-	$getPagesParam = array($pages, $displayPageType);
+	$getPagesSql = "SELECT * FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE name = ? AND categoriesName = ? AND type = ?";
+	$getPagesRow = "SELECT COUNT(*) FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE name = ? AND categoriesName = ? AND type = ?";
+	$getPagesParam = array($pages, $pagesCategory, $displayPageType);
 } else {
-	$getPagesSql = "SELECT * FROM pages WHERE name = ? AND status = ? AND type = ?";
-	$getPagesRow = "SELECT COUNT(*) FROM pages WHERE name = ? AND status = ? AND type = ?";
-	$getPagesParam = array($pages, 1, $displayPageType);
+	$getPagesSql = "SELECT * FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE name = ? AND categoriesName = ? AND status = ? AND type = ?";
+	$getPagesRow = "SELECT COUNT(*) FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE name = ? AND categoriesName = ? AND status = ? AND type = ?";
+	$getPagesParam = array($pages, $pagesCategory, 1, $displayPageType);
 }
 $result = $db->getRow($getPagesSql, $getPagesParam);
 $rows = $db->getRowSelect($getPagesRow, $getPagesParam);

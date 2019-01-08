@@ -1,7 +1,7 @@
 <?php
 $realPath = substr(dirname(__FILE__), 0, -strlen(basename(dirname(__FILE__))));
 $rootPath = "";
-$realPathPrivate = "xxxx/"; // In the specified folder, it is recommended the restriction of access in the .htaccess.
+$realPathPrivate = "xxxx/"; // In the specified folder, It's recommended the restriction of access in the .htaccess.
 
 require_once($realPath . $rootPath . "include_app/function.php");
 require_once($realPath . $rootPath . "include_app/database.php");
@@ -18,7 +18,7 @@ if ($_SERVER['SERVER_NAME'] === "xxx.test" || $_SERVER['SERVER_NAME'] === "xxx.e
 	$emailAddress = "xxx@xxx.xxx";
 }
 
-$pageType = array(1 => "PC &amp; Smartphone", "Mobile");
+$pageType = array(1 => "Responsive", "Mobile");
 
 $siteName = "Site Name";
 
