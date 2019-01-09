@@ -4,68 +4,71 @@
 common style
 ------------------------------------------------------------ */
 body {
-	margin: 0;
-	padding: 0;
-	background: #FFF;
-	color: #111114;
-	font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-	line-height: 1.61;
-	-webkit-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+  background: #FFF;
+  color: #111114;
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  line-height: 1.61;
+  -webkit-text-size-adjust: 100%;
 }
 a img {
-	border: none;
+  border: none;
 }
 h2 {
-	color: #F60;
+  color: #F60;
 }
 
 /* ------------------------------------------------------------
 header style
 ------------------------------------------------------------ */
 #headerUpper {
-	background: #EEEEEE;
+  background: #EEEEEE;
 }
 #headerUnder {
-	background: #06C;
+  background: #06C;
 }
 #headerUpperInner,
 #headerUnderInner {
-	max-width: 992px;
-	margin: 0 auto;
+  max-width: 992px;
+  margin: 0 auto;
 }
 header p {
-	margin: 0;
-	padding: 0 16px;
+  margin: 0;
+  padding: 0 16px;
+  font-size: 75%;
+  -webkit-font-feature-settings: 'palt' 1;
+  font-feature-settings: 'palt' 1;
 }
 header h1 {
-	margin: 0;
-	padding: 16px 16px 0;
+  margin: 0;
+  padding: 16px 16px 0;
 }
 header h1 img {
-	max-width: 100%;
-	height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 /* ------------------------------------------------------------
 contents style
 ------------------------------------------------------------ */
 #contents {
-	max-width: 960px;
-	margin: 0 auto;
-	padding: 0 16px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 #othersInfo {
-	font-size: 75%;
+  font-size: 75%;
 }
 
 /* ------------------------------------------------------------
 footer style
 ------------------------------------------------------------ */
 footer {
-	padding: 0 16px;
-	border-top: 3px solid #DDDDDD;
+  padding: 0 16px;
+  border-top: 3px solid #DDDDDD;
 }
 #footerInner {
-	max-width: 960px;
-	margin: 0 auto;
+  max-width: 960px;
+  margin: 0 auto;
 }

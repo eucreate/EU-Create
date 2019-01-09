@@ -19,14 +19,14 @@ if ($uaBrowserInfo["type"] === "mobile") {
 parse_str($_SERVER["QUERY_STRING"], $qs);
 if (array_key_exists("pages", $qs) === false && count($qs) === 0) {
 	$pages = "index";
-} elseif (isset($_GET["pages"]))  {
-	$pages = htmlspecialchars($qs["pages"]);
+} elseif (isset($_GET["pages"]) && $_GET["pages"] != "index" && preg_match('/^[a-zA-Z0-9_\-]*$/', $_GET["pages"])) {
+	$pages = $qs["pages"];
 } else {
 	$pages = "";
 }
 
-if (isset($_GET["categoriesName"])) {
-	$pagesCategory = htmlspecialchars($_GET["categoriesName"]);
+if (isset($_GET["categoriesName"]) && $_GET["categoriesName"] != "" && preg_match('/^[a-zA-Z0-9_\-]*$/', $_GET["categoriesName"])) {
+	$pagesCategory = $_GET["categoriesName"];
 } else {
 	$pagesCategory = "top";
 }

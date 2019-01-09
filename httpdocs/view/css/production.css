@@ -1,0 +1,55 @@
+#contents {
+  -webkit-font-feature-settings: 'pkna' 1;
+  font-feature-settings: 'pkna' 1;
+}
+
+/* ------------------------------------------------------------
+制作料金ページ
+------------------------------------------------------------ */
+h3.titleStyle0 {
+  padding: 8px 16px;
+  background: #06c url(images/bg_header.gif);
+  color: #fff;
+}
+h3.titleStyle0:before {
+  border-left: 9px solid #fff;
+  margin-left: -3px;
+  margin-right: 6px;
+  content: '';
+}
+
+table {
+  margin-bottom: 1em;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-top: 1px solid #06c;
+  border-left: 1px solid #06c;
+}
+thead td, tbody th {
+  padding: 6px;
+  background: #06c;
+  border-bottom: 1px solid #06c;
+  border-right: 1px solid #06c;
+  color: #fff;
+  text-align: center;
+}
+tbody td {
+  padding: 6px;
+  border-bottom: 1px solid #06c;
+  border-right: 1px solid #06c;
+}
+
+.fs75per {
+  font-size: 75%;
+}
+.fs14 {
+  font-size: 87.5%;
+}
+
+@media screen and (max-width: 767px) {
+  table {
+    font-size: 0.625rem;
+    -webkit-font-feature-settings: 'palt' 1;
+    font-feature-settings: 'palt' 1;
+  }
+}

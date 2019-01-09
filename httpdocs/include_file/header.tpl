@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width">
 <meta name="format-detection" content="telephone=no">
 <link rel="stylesheet" href="/<?php echo $viewPath; ?>/css/common.css" media="all">
-<?php if ($_SERVER['SCRIPT_NAME'] === "/index.php") { ?><link rel="stylesheet" href="/<?php echo $viewPath; ?>/css/top.css" media="all"><?php } else { ?><link rel="stylesheet" href="/<?php echo $viewPath; ?>/css/style.css" media="all"><?php } echo "\n"; ?>
+<?php if ($_SERVER['SCRIPT_NAME'] === "/contact.php") { ?><link rel="stylesheet" href="/<?php echo $viewPath; ?>/css/style.css" media="all"><?php } ?>
 <?php if ($_SERVER["SERVER_NAME"] === "xxx.xxx" || $_SERVER["SERVER_NAME"] === "www.xxx.xxx") {?>
 <script>
 

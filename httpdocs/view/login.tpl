@@ -3,7 +3,7 @@
 	<form method="post" action="<?php echo $_SERVER["SCRIPT_NAME"]; ?>">
 	<dl>
 	  <dt>ID</dt>
-	  <dd><input type="text" name="id" pattern="^[0-9a-zA-Z\\-\\_]+$" placeholder="半角英数とハイフン、アンダースコアのみ入力できます" required></dd>
+	  <dd><input type="text" name="id" pattern="^[0-9a-zA-Z\-\_]+$" placeholder="半角英数とハイフン、アンダースコアのみ入力できます" required></dd>
 	  <dt>Password</dt>
 	  <dd><input type="password" name="pass"></dd>
 	  <dd><input type="submit" value="send"></dd>
