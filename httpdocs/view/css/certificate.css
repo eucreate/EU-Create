@@ -1,0 +1,22 @@
+#contents {
+  padding-bottom: 1em;
+  word-break: break-all;
+  -webkit-font-feature-settings: 'palt' 1;
+  font-feature-settings: 'palt' 1;
+}
+table {
+  border-collapse: collapse;
+  border-top: 1px solid gray;
+  border-left: 1px solid gray;
+}
+table th, table td {
+  padding: 6px;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+@media screen and (max-width: 767px) {
+  table {
+    font-size: 62.5%;
+  }
+}
