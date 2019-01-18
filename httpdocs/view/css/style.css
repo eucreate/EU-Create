@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+/* ------------------------------------------------------------
+mail form style
+------------------------------------------------------------ */
+#mailForm dt {
+  padding: 5px;
+  background: #EEEEEE;
+  font-weight: bold;
+}
+#mailForm dd {
+  margin: 0;
+  padding: 5px 0;
+}
+#mailForm .required, #mailForm .errorText {
+  color: #C00;
+}
+#mailForm input[type=text], #mailForm textarea {
+  max-width: 500px;
+  padding: 8px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #111114;
+  border-radius: 5px;
+  font-size: 100%;
+}
+#mailForm input[type=text]:focus, #mailForm textarea:focus {
+  border: 2px solid #111114;
+}
+#mailForm input[type=submit] {
+  margin-bottom: 5px;
+  padding: 12px 32px;
+  border: none;
+  background-color: #DDDDDD;
+  font-size: 100%;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+#mailForm input[type=submit]:hover {
+  background: #09F;
+  color: #FFF;
+}
+#mailForm textarea {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* Chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  #mailForm textarea {
+    font-size: 124%;
+  }
+}
