@@ -1,7 +1,7 @@
 <?php
 $realPath = substr(dirname(__FILE__), 0, -strlen(basename(dirname(__FILE__))));
 $rootPath = "";
-$realPathPrivate = "xxxx/"; // In the specified folder, It's recommended the restriction of access in the .htaccess.
+$realPathPrivate = "xxxx/"; // In the specified folder, it's recommended the restriction of access in the .htaccess.
 
 require_once($realPath . $rootPath . "include_app/function.php");
 require_once($realPath . $rootPath . "include_app/database.php");
