@@ -8,7 +8,13 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="<?php echo $pageTitle . ": " . $siteName; ?>">
 <meta property="og:url" content="http://www.xxx.xxx<?php echo $_SERVER["REQUEST_URI"]; ?>">
-<meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_QUOTES, 'UTF-8'); ?>">
+<?php
+  if ($pagesOgpDescription != "") {
+    echo "<meta property=\"og:description\" content=\"" . $pagesOgpDescription . "\">\n";
+  } else {
+    echo "<meta property=\"og:description\" content=\"" . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "\">\n";
+  }
+?>
 <meta property="og:image" content="http://www.xxx.xxx/assets/images/common/ogp.png">
 <meta property="og:site_name" content="<?php echo htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8'); ?>">
 <meta name="twitter:card" content="summary">
