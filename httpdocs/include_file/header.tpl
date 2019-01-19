@@ -48,7 +48,7 @@ if ($customHeader != null || $customHeader != "") { echo $customHeader."\n"; } ?
   <div id="headerUnder">
     <div id="headerUnderInner">
       <h1><a href="<?php echo $backUrl; ?>"><img src="/<?php echo $viewPath; ?>/images/logo.svg" alt="Your site name" width="220"></a></h1>
-      <!-- /#headerUnderInner --></div>
-    <!-- /#headerUnder --></div>
-  </header>
+    <!-- /#headerUnderInner --></div>
+  <!-- /#headerUnder --></div>
+</header>
 <div id="contents">
