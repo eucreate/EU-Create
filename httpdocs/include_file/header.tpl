@@ -9,7 +9,7 @@
 <meta property="og:title" content="<?php echo $pageTitle . ": " . $siteName; ?>">
 <meta property="og:url" content="http://www.xxx.xxx<?php echo $_SERVER["REQUEST_URI"]; ?>">
 <?php
-  if ($pagesOgpDescription != "") {
+  if (isset($pagesOgpDescription) && $pagesOgpDescription != "") {
     echo "<meta property=\"og:description\" content=\"" . $pagesOgpDescription . "\">\n";
   } else {
     echo "<meta property=\"og:description\" content=\"" . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "\">\n";
