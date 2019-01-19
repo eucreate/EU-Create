@@ -8,9 +8,9 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="<?php echo $pageTitle . ": " . $siteName; ?>">
 <meta property="og:url" content="http://www.xxx.xxx<?php echo $_SERVER["REQUEST_URI"]; ?>">
-<meta property="og:description" content="Description of your site.">
+<meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_QUOTES, 'UTF-8'); ?>">
 <meta property="og:image" content="http://www.xxx.xxx/assets/images/common/ogp.png">
-<meta property="og:site_name" content="<?php echo $siteName; ?>">
+<meta property="og:site_name" content="<?php echo htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8'); ?>">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="/<?php echo $viewPath; ?>/css/common.css" media="all">
 <?php if ($_SERVER['SCRIPT_NAME'] === "/contact.php") { ?><link rel="stylesheet" href="/<?php echo $viewPath; ?>/css/style.css" media="all"><?php } ?>
@@ -40,15 +40,15 @@ if ($customHeader != null || $customHeader != "") { echo $customHeader."\n"; } ?
 }
 ?>
 <header>
-	<div id="headerUpper">
-		<div id="headerUpperInner">
-			<p>Description of your site.</p>
-		<!-- /#headerUpper --></div>
-	<!-- /#headerUpperInner --></div>
-	<div id="headerUnder">
-		<div id="headerUnderInner">
-			<h1><a href="<?php echo $backUrl; ?>"><img src="/<?php echo $viewPath; ?>/images/logo.svg" alt="Your site name" width="220"></a></h1>
-		<!-- /#headerUnderInner --></div>
-	<!-- /#headerUnder --></div>
-</header>
+  <div id="headerUpper">
+    <div id="headerUpperInner">
+      <p><?php echo htmlspecialchars($description, ENT_QUOTES, 'UTF-8'); ?></p>
+      <!-- /#headerUpper --></div>
+    <!-- /#headerUpperInner --></div>
+  <div id="headerUnder">
+    <div id="headerUnderInner">
+      <h1><a href="<?php echo $backUrl; ?>"><img src="/<?php echo $viewPath; ?>/images/logo.svg" alt="Your site name" width="220"></a></h1>
+      <!-- /#headerUnderInner --></div>
+    <!-- /#headerUnder --></div>
+  </header>
 <div id="contents">

@@ -11,21 +11,22 @@ $viewPath = $rootPath.$viewDir;
 $viewFileExt = ".tpl";
 
 if ($_SERVER['SERVER_NAME'] === "xxx.test" || $_SERVER['SERVER_NAME'] === "xxx.example") {
-	// テスト用
-	$emailAddress = "yyy@yyy.yyy";
+  // For test
+  $emailAddress = "yyy@yyy.yyy";
 } else {
-	// 本番用
-	$emailAddress = "xxx@xxx.xxx";
+  // For production
+  $emailAddress = "xxx@xxx.xxx";
 }
 
 $pageType = array(1 => "Responsive", "Mobile");
 
 $siteName = "Site Name";
+$description = "Description of your site.";
 
 $customHeader = null;
 $backUrlReferer = false;
 
-// データベース
+// Database
 define('dbType', "sqlite"); // MySQL(MariaDB) or sqlite
 define('dbServer', "");
 define('dbUser', "");
