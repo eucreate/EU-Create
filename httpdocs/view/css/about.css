@@ -1,0 +1,27 @@
+table {
+  border-collapse: collapse;
+  border-top: #06c 1px solid;
+  border-left: #06c 1px solid;
+}
+table tbody th, table tbody td {
+  padding: 8px;
+  font-size: 87.5%;
+  -webkit-font-feature-settings: 'palt' 1;
+  font-feature-settings: 'palt' 1;
+}
+table tbody th {
+  background-color: #06c;
+  border-bottom: white 1px solid;
+  color: white;
+}
+table tbody tr:last-child th {
+  border-bottom: #06c 1px solid;
+}
+table tbody td {
+  border-right: #06c 1px solid;
+  border-bottom: #06c 1px solid;
+}
+
+#law table.table1 {
+  margin-bottom: 1em;
+}

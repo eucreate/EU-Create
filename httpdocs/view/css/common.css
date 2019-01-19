@@ -19,6 +19,15 @@ h2 {
   color: #F60;
 }
 
+.text-palt {
+  -webkit-font-feature-settings: 'palt' 1;
+  font-feature-settings: 'palt' 1;
+}
+.text-pkna {
+  -webkit-font-feature-settings: 'pkna' 1;
+  font-feature-settings: 'pkna' 1;
+}
+
 /* ------------------------------------------------------------
 header style
 ------------------------------------------------------------ */
