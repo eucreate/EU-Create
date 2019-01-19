@@ -14,6 +14,9 @@ table th, table td {
   border-right: 1px solid gray;
   border-bottom: 1px solid gray;
 }
+table.pgp {
+  font-size: 75%;
+}
 
 @media screen and (max-width: 767px) {
   table {
