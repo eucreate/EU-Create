@@ -50,10 +50,14 @@ if ($rows > 0) {
     $pagesContents = $row["contents"];
     $pagesPhpScript = $row["phpScript"];
     $pagesOgpDescription = $row["ogpDescription"];
+    $pagesTopicPath = $row["topicPath"];
+    $pagesCategoriesID = $row["pagesCategoriesID"];
+    $categoriesName = $row["categoriesName"];
+    $categoriesTitle = $row["categoriesTitle"];
   }
 } else {
   $pageTitle = "Not Found";
-  $pagesContents = "<p>Not Found<br>ページが見つかりませんでした。</p>\n<p><a href=\"/\">Front Page</a></p>\n";
+  $pagesContents = "<p>Not Found<br>ページが見つかりませんでした。</p>\n<p><a href=\"/\">" . $siteName . " Front Page</a></p>\n";
   $pagesPhpScript = 0;
 }
 

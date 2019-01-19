@@ -58,3 +58,12 @@ if ($customHeader != null || $customHeader != "") { echo $customHeader."\n"; } ?
   <!-- /#headerUnder --></div>
 </header>
 <div id="contents">
+<?php
+  if (isset($pagesTopicPath) && (int)$pagesTopicPath === 1) {
+    if (isset($pagesCategoriesID) && (int)$pagesCategoriesID === 1) {
+      echo "<p class=\"topicPath\"><a href=\"/\">" . $siteName . "</a>&nbsp;&gt;&nbsp;" . $pageTitle . "</p>\n";
+    } else {
+      echo "<p class=\"topicPath\"><a href=\"/\">" . $siteName . "</a>&nbsp;&gt;&nbsp;<a href=\"/" . $categoriesName . ".html\">" . $categoriesTitle . "</a>&nbsp;&gt;&nbsp;" . $pageTitle . "</p>\n";
+    }
+  }
+?>

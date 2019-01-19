@@ -69,6 +69,10 @@ contents style
 #othersInfo {
   font-size: 75%;
 }
+.topicPath {
+  -webkit-font-feature-settings: 'palt' 1;
+  font-feature-settings: 'palt' 1;
+}
 
 /* ------------------------------------------------------------
 footer style
