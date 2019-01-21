@@ -12,7 +12,7 @@
   if (isset($pagesOgpDescription) && $pagesOgpDescription != "") {
     echo "<meta property=\"og:description\" content=\"" . $pagesOgpDescription . "\">\n";
   } else {
-    echo "<meta property=\"og:description\" content=\"" . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "\">\n";
+    echo "<meta property=\"og:description\" content=\"" . $description . "\">\n";
   }
 ?>
 <meta property="og:image" content="http://www.xxx.xxx/assets/images/common/ogp.png">
@@ -46,14 +46,16 @@ if ($customHeader != null || $customHeader != "") { echo $customHeader."\n"; } ?
 }
 ?>
 <header>
+<?php if (isset($pagesDescriptionFlag) && $pagesDescriptionFlag > 0) { ?>
   <div id="headerUpper">
     <div id="headerUpperInner">
-      <p><?php echo htmlspecialchars($description, ENT_QUOTES, 'UTF-8'); ?></p>
+      <p><?php echo $description; ?></p>
       <!-- /#headerUpper --></div>
     <!-- /#headerUpperInner --></div>
+<?php } ?>
   <div id="headerUnder">
     <div id="headerUnderInner">
-      <h1><a href="<?php echo $backUrl; ?>"><img src="/<?php echo $viewPath; ?>/images/logo.svg" alt="Your site name" width="220"></a></h1>
+      <h1><a href="<?php echo $backUrl; ?>"><img src="/<?php echo $viewPath; ?>/images/logo.svg" alt="<?php echo $siteName; ?>" width="220"></a></h1>
     <!-- /#headerUnderInner --></div>
   <!-- /#headerUnder --></div>
 </header>

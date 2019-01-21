@@ -20,9 +20,6 @@ if ($_SERVER['SERVER_NAME'] === "xxx.test" || $_SERVER['SERVER_NAME'] === "xxx.e
 
 $pageType = array(1 => "Responsive", "Mobile");
 
-$siteName = "Site Name";
-$description = "Description of your site.";
-
 $customHeader = null;
 $backUrlReferer = false;
 
@@ -34,3 +31,17 @@ define('dbPass', "");
 define('dbName', "");
 define('dbSqlite', "xxx.xx");
 define('sqlitePath', $realPathPrivate);
+
+// Retrieve configuration information from database
+if (isset($dbPath) != "") {
+  $dbPath = $dbPath;
+} else {
+  $dbPath = "";
+}
+$db = new dbc($dbPath);
+$getConfigSql = "SELECT * FROM siteConfig";
+$configResult = $db->getRowOnce($getConfigSql);
+$configDB = array_column($configResult, 'configValue');
+$siteName = $configDB[0];
+$description = $configDB[1];
+$db->Disconnect();

@@ -54,6 +54,7 @@ if ($rows > 0) {
     $pagesCategoriesID = $row["pagesCategoriesID"];
     $categoriesName = $row["categoriesName"];
     $categoriesTitle = $row["categoriesTitle"];
+    $pagesDescriptionFlag = (int)$row["pagesDescriptionFlag"];
   }
 } else {
   $pageTitle = "Not Found";

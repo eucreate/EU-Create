@@ -1,6 +1,5 @@
 <?php
 require_once(dirname(__FILE__).'/include_app/config.php');
-
 require_once($realPath . $rootPath . "include_app/cookieSession.php");
 
 $fileName = pathinfo(__FILE__, PATHINFO_FILENAME);
@@ -50,7 +49,11 @@ if (isset($_POST['check'], $_SESSION['ticket'], $_POST['ticket']) && $_POST['che
 メールアドレス：{$formEmail}
 メッセージ：
 {$_POST['message']}";
+	$message .= "\n\n" . $_SERVER['HTTP_USER_AGENT'];
+	$message .= "\n" . $_SERVER["REMOTE_ADDR"];
 	$from = "From:".mb_encode_mimeheader($_POST['name'])."<".$formEmail.">";
+	$from .= "\nX-Mailer: EU-Create Form Mail";
+	$from .= "\nReturn-Path:" . $_POST['email'];
 	// mobile
 	if ($uaBrowserInfo["type"] === "mobile") {
 	//	mb_language("uni");
@@ -70,6 +73,7 @@ if (isset($_POST['check'], $_SESSION['ticket'], $_POST['ticket']) && $_POST['che
 	// お問い合わせした方へのメール送信
 	$from = "From:".mb_encode_mimeheader($siteName)."<".$emailAddress.">";
 	$from .= "\nX-Mailer: EU-Create Form Mail";
+	$from .= "\nReturn-Path:" . $emailAddress;
 	$to = $_POST['email'];
 	$subject = "お問い合わせを受け付けました";
 	$message = "{$_POST['name']} 様\n\nお問い合わせを受け付けました。\n\n";

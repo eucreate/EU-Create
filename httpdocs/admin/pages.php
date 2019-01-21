@@ -1,7 +1,8 @@
 <?php
+$dbPath = "../";
 require_once(dirname(__FILE__).'/../include_app/config.php');
 require_once($realPath . $rootPath . "include_app/cookieSession.php");
-$db = new dbc("../");
+$db = new dbc($dbPath);
 $fileName = pathinfo(__FILE__, PATHINFO_FILENAME);
 $pageTitle = "ページ管理";
 // ログイン状態のチェック
