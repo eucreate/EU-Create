@@ -67,3 +67,27 @@ function readContents($contents, $phpScript, $realPath, $viewPath) {
 		print $contents;
 	}
 }
+
+function newsIndex($recordLimit = 5) {
+	$db = new dbc();
+	if (isset($_GET["preview"]) && (int)$_GET["preview"] === 1) {
+		$flag = "";
+	} else {
+		$flag = "WHERE newsPublicFlag = 1 ";
+	}
+	$getNewsSql = "SELECT * FROM news {$flag}ORDER BY newsModifiedDate LIMIT {$recordLimit}";
+	//var_dump($getNewsSql);
+	$resultNewsSql = $db->getRowOnce($getNewsSql);
+	//var_dump($resultNewsSql);
+	if (count($resultNewsSql) > 0) {
+		foreach ($resultNewsSql as $row) {
+			echo "\t\t\t<dl>
+			<dt>{$row["newsDspDate"]}</dt>
+			<dd><a href=\"news.php?id=" . (int)$row["newsId"] ."\">" . $row["newsTitle"] . "</a></dd>
+			</dl>\n";
+		}
+	} else {
+		echo "<p>ニュースはありませんでした。</p>\n";
+	}
+	$db->Disconnect();
+}

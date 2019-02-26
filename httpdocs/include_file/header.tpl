@@ -2,7 +2,14 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title><?php echo $pageTitle . ": " . $siteName; ?></title>
+<?php
+if ($_SERVER["SCRIPT_NAME"] === "/news.php") {
+  $categoryName = "News - ";
+} else {
+  $categoryName = "";
+}
+?>
+<title><?php echo $categoryName . $pageTitle . ": " . $siteName; ?></title>
 <meta name="viewport" content="width=device-width">
 <meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="website">
