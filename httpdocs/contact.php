@@ -65,7 +65,7 @@ if (isset($_POST['check'], $_SESSION['ticket'], $_POST['ticket']) && $_POST['che
 ".mb_convert_kana(mb_convert_encoding($_POST['message'], "UTF-8", "SJIS-win"), "KV");
 		$from = "From:".mb_encode_mimeheader(mb_convert_encoding($_POST['name'], "UTF-8", "SJIS-win"))."<".$formEmail.">";
 	}
-	if (mb_send_mail($to, $subject, $message, $from)) {
+	if (mb_send_mail($to, $subject, $message, $from, '-f'.$emailAddress)) {
 		$mailStatus = 1;
 	} else {
 		$mailStatus = 0;
@@ -97,7 +97,7 @@ http://{$_SERVER['SERVER_NAME']}/
 メッセージ：
 ".mb_convert_kana(mb_convert_encoding($_POST['message'], "UTF-8", "SJIS-win"), "KV");
 	}
-	mb_send_mail($to, $subject, $message, $from);
+	mb_send_mail($to, $subject, $message, $from, '-f'.$emailAddress);
 	$_SESSION['mailStatus'] = $mailStatus;
 	$url = "/contactFin.php";
 	if ($urlSessionSet != "") {
@@ -127,23 +127,7 @@ http://{$_SERVER['SERVER_NAME']}/
 		$errorEmail = true;
 		$errorEmailValue = "メールアドレスが正しく入力されていません。";
 	}
-	if ($_POST['emailCheck'] == "") {
-		$errorEmailCheck = true;
-		$errorEmailCheckValue = "メールアドレス確認用が未入力です。";
-	} elseif (preg_match("/^[a-zA-Z0-9_\.\-]+?@[A-Za-z0-9_\.\-]+$/", $_POST['emailCheck']) === 0) {
-		$errorEmailCheck = true;
-		$errorEmailCheckValue = "メールアドレス確認用が正しく入力されていません。";
-	}
-	if ($_POST['email'] != "" && $_POST['emailCheck'] != "") {
-		if ($_POST['email'] != $_POST['emailCheck']) {
-			$errorEmail = true;
-			$errorEmailCheck = true;
-			$errorEmailValue = "メールアドレスが一致していません。";
-			$errorEmailCheckValue = "メールアドレスが一致していません。";
-			$_POST['emailCheck'] = "";
-		}
-	}
-	if ($errorName || $errorEmail || $errorEmailCheck || $errorMessage) {
+	if ($errorName || $errorEmail || $errorMessage) {
 	$customHeader = <<<EOF
 <script>
 <!--
