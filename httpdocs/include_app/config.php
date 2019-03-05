@@ -25,19 +25,16 @@ $backUrlReferer = false;
 
 // Database
 define('dbType', "sqlite"); // MySQL(MariaDB) or sqlite
-define('dbServer', "");
-define('dbUser', "");
-define('dbPass', "");
-define('dbName', "");
+define('dbServer', "localhost");
+define('dbUser', "Database user name");
+define('dbPass', "Database password");
+define('dbName', "Database name");
+define('dbCharset', "utf8");
 define('dbSqlite', "xxx.xx");
 define('sqlitePath', $realPathPrivate);
 
 // Retrieve configuration information from database
-if (isset($dbPath) != "") {
-  $dbPath = $dbPath;
-} else {
-  $dbPath = "";
-}
+$dbPath = (isset($dbPath) != "") ? $dbPath : "";
 $db = new dbc($dbPath);
 $getConfigSql = "SELECT * FROM siteConfig";
 $configResult = $db->getRowOnce($getConfigSql);

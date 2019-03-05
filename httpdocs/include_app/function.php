@@ -91,3 +91,20 @@ function newsIndex($recordLimit = 5) {
 	}
 	$db->Disconnect();
 }
+
+function wpBlogIndex($recordLimit = 5, $blogTable = "wp_") {
+	$db = new dbc("", "MySQL", "utf8mb4");
+	$blogSql = "SELECT * FROM {$blogTable}posts WHERE post_status = 'publish' AND post_type = 'post' ORDER BY post_date DESC LIMIT {$recordLimit}";
+	$resultBlog = $db->getRowOnce($blogSql);
+	if (count($resultBlog) > 0) {
+		echo "<dl>\n";
+		foreach ($resultBlog as $row) {
+			echo "<dt>" . date("Y年m月d日 H:i", strtotime($row["post_date"])) . "</dt>\n";
+			echo "<dd><a href=\"" . $row["guid"] . "\">" . $row["post_title"] . "</a></dd>\n";
+		}
+		echo "</dl>\n";
+	} else {
+		echo "<p>ブログはありませんでした。</p>\n";
+	}
+	$db->Disconnect();
+}
