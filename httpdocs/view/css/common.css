@@ -28,6 +28,10 @@ h2 {
   font-feature-settings: 'pkna' 1;
 }
 
+.font-koburina-w3 {
+  font-family: "Koburina Gothic W3 JIS2004", sans-serif;
+}
+
 /* ------------------------------------------------------------
 header style
 ------------------------------------------------------------ */
@@ -42,6 +46,17 @@ header style
   max-width: 992px;
   margin: 0 auto;
 }
+#headerUnderInner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
 header p {
   margin: 0;
   padding: 0 16px;
@@ -49,13 +64,45 @@ header p {
   -webkit-font-feature-settings: 'palt' 1;
   font-feature-settings: 'palt' 1;
 }
-header h1 {
+header #headerUnderInner h1 {
   margin: 0;
   padding: 16px 16px 0;
 }
-header h1 img {
+header #headerUnderInner h1 img {
   max-width: 100%;
   height: auto;
+}
+header #headerUnderInner #search {}
+
+@media screen and (max-width: 575px) {
+  #headerUnderInner {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  header #headerUnderInner h1,
+  header #headerUnderInner #search {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    box-sizing: border-box;
+  }
+  header #headerUnderInner #search {
+    padding: 0 16px 16px;
+  }
+  header #headerUnderInner #search input[type="search"] {
+    width: 100%;
+    margin-bottom: .5em;
+    padding: 6px;
+    border-radius: 6px;
+  }
+  header #headerUnderInner #search #selectMode {
+    padding: 6px;
+    border-radius: 6px;
+  }
+  header #headerUnderInner #search input[type="submit"] {
+    padding: 4px 6px;
+    border-radius: 6px;
+  }
 }
 
 /* ------------------------------------------------------------
@@ -81,6 +128,27 @@ footer {
   padding: 0 16px;
   border-top: 3px solid #DDDDDD;
 }
+.footerMenu {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.footerMenu ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  -webkit-font-feature-settings: 'palt' 1;
+  font-feature-settings: 'palt' 1;
+}
+.footerMenu ul li {
+  display: inline-block;
+}
+.footerMenu ul li:not(:last-child) {
+  margin-right: 0.9em;
+}
+.footerMenu ul li a:hover {
+  text-decoration: none;
+}
+
 #footerInner {
   max-width: 960px;
   margin: 0 auto;
