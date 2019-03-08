@@ -16,19 +16,33 @@ if ($uaBrowserInfo["type"] === "mobile") {
 }
 
 if (isset($_POST["words"]) && $_POST["words"] != "") {
-  //var_dump($_POST);
   $pageTitle = "&quot;" . htmlspecialchars($_POST["words"], ENT_QUOTES, 'UTF-8') . "&quot;";
+  $searchWords = explode(" ", htmlspecialchars($_POST["words"], ENT_QUOTES, 'UTF-8'));
   $db = new dbc();
   if ((int)$_POST["mode"] === 1) {
     $pageTitle .= " page search result";
-    $getSearchSql = "SELECT * FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE type = 1 AND status = 1 AND contents LIKE ?";
+    $keywordCondition = array();
+    foreach ($searchWords as $keyword) {
+      $keywordCondition[] = "contents LIKE ?";
+    }
+    $keywordCondition = implode(' AND ', $keywordCondition);
+    $getSearchSql = "SELECT * FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE type = 1 AND status = 1 AND {$keywordCondition}";
+    $paramKeywords = array();
   } else {
+    $keywordCondition = array();
+    foreach ($searchWords as $keyword) {
+      $keywordCondition[] = "newsBody LIKE ?";
+    }
+    $keywordCondition = implode(' AND ', $keywordCondition);
     $pageTitle .= " news search result";
-    $getSearchSql = "SELECT * FROM news WHERE newsPublicFlag = 1 AND newsBody LIKE ?";
+    $getSearchSql = "SELECT * FROM news WHERE newsPublicFlag = 1 AND {$keywordCondition}";
   }
-  $getSearchParam = array("%" . htmlspecialchars($_POST["words"], ENT_QUOTES, 'UTF-8') . "%");
+  foreach ($searchWords as $keyword) {
+    $paramKeywords[] = "%" . $keyword . "%";
+  }
+  $getSearchParam = array();
+  $getSearchParam = array_merge($getSearchParam, $paramKeywords);
   $result = $db->getRow($getSearchSql, $getSearchParam);
-  //var_dump($result);
   $db->Disconnect();
 } else {
   $pageTitle = "Search result";

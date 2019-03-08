@@ -65,7 +65,7 @@ if ($customHeader != null || $customHeader != "") { echo $customHeader."\n"; } ?
       <h1><a href="<?php echo $backUrl; ?>"><img src="/<?php echo $viewPath; ?>/images/logo.svg" alt="<?php echo $siteName; ?>" width="220"></a></h1>
       <div id="search">
         <form action="/search.php" method="post">
-          <input type="search" name="words" placeholder="Word (multiple search not allowed)">
+          <input type="search" name="words" placeholder="Word (multiple search with single-byte space)">
           <select name="mode" id="selectMode">
             <option value="1">Page</option>
             <option value="2">News</option>

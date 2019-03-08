@@ -9,16 +9,20 @@ if (isset($_POST["words"]) && $_POST["words"] != "") {
     if ((int)$_POST["mode"] === 1){
       foreach ($result as $row) {
         $categoriesName = $row["categoriesName"];
+        $categoriesTitle = $row["categoriesTitle"];
         $pagesName = $row["name"];
         $pagesTitle = $row["title"];
         if ($categoriesName != "top") {
           $linkUri = "/" . $categoriesName . "/" . $pagesName . ".html";
+          $linkCategoriesName = "（" . $categoriesTitle . "）";
         } elseif ($categoriesName === "top" && $pagesName === "index") {
           $linkUri = "/";
+          $linkCategoriesName = "";
         } else {
           $linkUri = "/" . $pagesName . ".html";
+          $linkCategoriesName = "";
         }
-        echo "<p><a href=\"{$linkUri}\">{$pagesTitle}</a></p>\n";
+        echo "<p><a href=\"{$linkUri}\">{$pagesTitle}{$linkCategoriesName}</a></p>\n";
       }
     } else {
       foreach ($result as $row) {
