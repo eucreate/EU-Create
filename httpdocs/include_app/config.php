@@ -23,8 +23,10 @@ $pageType = array(1 => "Responsive", "Mobile");
 $customHeader = null;
 $backUrlReferer = false;
 
+$langID = array("ja", "en-US");
+
 // Database
-define('dbType', "sqlite"); // MySQL(MariaDB) or sqlite
+define('dbType', "MySQL"); // MySQL(MariaDB) or sqlite
 define('dbServer', "localhost");
 define('dbUser', "Database user name");
 define('dbPass', "Database password");
@@ -34,8 +36,7 @@ define('dbSqlite', "xxx.xx");
 define('sqlitePath', $realPathPrivate);
 
 // Retrieve configuration information from database
-$dbPath = (isset($dbPath) != "") ? $dbPath : "";
-$db = new dbc($dbPath);
+$db = new dbc();
 $getConfigSql = "SELECT * FROM siteConfig";
 $configResult = $db->getRowOnce($getConfigSql);
 $configDB = array_column($configResult, 'configValue');

@@ -14,6 +14,11 @@ if ($uaBrowserInfo["type"] === "mobile") {
   mb_http_output("SJIS-win");
   ob_start("mb_output_handler");
   $displayPageType = 2;
+} else {
+  if (empty($_SERVER['HTTPS'])) {
+    header("Location: https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
+    exit;
+  }
 }
 
 parse_str($_SERVER["QUERY_STRING"], $qs);
@@ -33,17 +38,14 @@ if (isset($_GET["categoriesName"]) && $_GET["categoriesName"] != "" && preg_matc
 
 $db = new dbc();
 if (isset($_GET["preview"]) && (int)$_GET["preview"] === 1) {
-  $getPagesSql = "SELECT * FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE name = ? AND categoriesName = ? AND type = ?";
-  $getPagesRow = "SELECT COUNT(*) FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE name = ? AND categoriesName = ? AND type = ?";
-  $getPagesParam = array($pages, $pagesCategory, $displayPageType);
+  $getPagesSql = "SELECT * FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE name = ? AND categoriesName = ? AND type = ? AND langID = ?";
+  $getPagesParam = array($pages, $pagesCategory, $displayPageType, 0);
 } else {
-  $getPagesSql = "SELECT * FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE name = ? AND categoriesName = ? AND status = ? AND type = ?";
-  $getPagesRow = "SELECT COUNT(*) FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE name = ? AND categoriesName = ? AND status = ? AND type = ?";
-  $getPagesParam = array($pages, $pagesCategory, 1, $displayPageType);
+  $getPagesSql = "SELECT * FROM pages INNER JOIN pagesCategories ON pages.pagesCategoriesID = pagesCategories.pagesCategoriesID WHERE name = ? AND categoriesName = ? AND status = ? AND type = ? AND langID = ?";
+  $getPagesParam = array($pages, $pagesCategory, 1, $displayPageType, 0);
 }
 $result = $db->getRow($getPagesSql, $getPagesParam);
-$rows = $db->getRowSelect($getPagesRow, $getPagesParam);
-if ($rows > 0) {
+if (count($result) > 0) {
   foreach ($result as $row) {
     $pageTitle = $row["title"];
     $customHeader = $row["header"];
