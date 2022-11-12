@@ -1,0 +1,118 @@
+@charset "utf-8";
+
+/* ------------------------------------------------------------
+common style
+------------------------------------------------------------ */
+body {
+	margin: 0;
+	padding: 0;
+	background: #111;
+	color: #111114;
+	font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+	line-height: 1.61;
+	-webkit-text-size-adjust: 100%;
+}
+/*h1, h2, p, ul {
+	margin: 0;
+}*/
+a:hover {
+	text-decoration: none;
+}
+
+/* ------------------------------------------------------------
+header style
+------------------------------------------------------------ */
+header {
+	margin: 0;
+	padding: 0 16px;
+	background: transparent;
+	color: #EEE;
+	overflow: auto;
+}
+header a {
+	color: #EEE;
+}
+header h1 {
+	float: left;
+}
+header p {
+	float: right;
+}
+
+/* ------------------------------------------------------------
+contents style
+------------------------------------------------------------ */
+#contents {
+	clear: both;
+	display: table;
+}
+
+/* ------------------------------------------------------------
+navigation style
+------------------------------------------------------------ */
+#side {
+	display: table-cell;
+	width: 320px;
+	min-width: 320px;
+	margin: 0;
+	padding: 0 16px;
+	background: #333;
+	color: #EEE;
+	box-sizing: border-box;
+}
+#side a {
+	color: #EEE;
+}
+
+/* ------------------------------------------------------------
+main style
+------------------------------------------------------------ */
+#main {
+	display: table-cell;
+	width: 100%;
+	margin: 0;
+	padding: 0 16px;
+	background: #EEE;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+/* ------------------------------------------------------------
+footer style
+------------------------------------------------------------ */
+footer {
+	clear: both;
+	margin: 0;
+	padding: 0 16px;
+	background: transparent;
+	color: #EEE;
+	overflow: auto;
+}
+
+/* ------------------------------------------------------------
+メディアクエリー用
+------------------------------------------------------------ */
+@media screen and (max-width: 419px) {
+	header h1 {
+		float: none;
+	}
+	header p {
+		float: none;
+		text-align: right;
+	}
+}
+@media screen and (max-width: 767px) {
+	#contents {
+		display: block;
+		overflow: auto;
+	}
+	#side {
+		display: block;
+		width: 100%;
+		overflow: auto;
+	}
+	#main {
+		display: block;
+		overflow: auto;
+	}
+}

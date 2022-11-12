@@ -1,0 +1,125 @@
+@charset "utf-8";
+
+/* ------------------------------------------------------------
+page management style
+------------------------------------------------------------ */
+table {
+	width: 100%;
+	min-width: 420px;
+	margin: 0 0 1em;
+	border-spacing: 0;
+	border-collapse: separate;
+	border-top: 1px solid #111;
+	border-left: 1px solid #111;
+	box-sizing: border-box;
+	overflow-x: scroll;
+}
+th, td {
+	padding: 6px;
+	border-right: 1px solid #111;
+	border-bottom: 1px solid #111;
+}
+thead th {
+	background: #333;
+	color: #eee;
+}
+tbody {
+	background: #fff;
+}
+.columnAction {
+	width: 86px;
+}
+.columnId {
+	width: 42px;
+}
+.columnType {
+	width: 112px;
+}
+.columnStatus {
+	width: 78px;
+}
+.columnDate {
+	width: 190px;
+}
+tbody .columnId, tbody .columnStatus, tbody .columnDate {
+	text-align: center;
+}
+#pages dl {
+	display: table;
+	width: 100%;
+	margin: 0;
+}
+#pages dl > dt {
+	display: table-cell;
+	width: 170px;
+	padding: 8px;
+	background: #222;
+	color: #eee;
+	vertical-align: middle;
+}
+#pages dl:nth-of-type(even) > dt {
+	background: #333;
+}
+#pages dl > dd {
+	diplay: table-cell;
+	width: auto;
+	margin: 0;
+	padding: 8px;
+	background: #fff;
+	box-sizing: border-box;
+	vertical-align: middle;
+}
+#pages dl:nth-of-type(odd) > dd {
+	background: #f6f6f6;
+}
+#pages dl dd dl {
+	display: block;
+}
+#pages dl dd dt {
+	display: block;
+	width: auto;
+	padding: 0;
+	background: transparent;
+	color: #111114;
+}
+#pages dl dd dd {
+	display: block;
+	width: auto;
+	padding: 0;
+	background: transparent;
+	color: #111114;
+}
+#pages input[type=text], #pages textarea {
+	width: 100%;
+	padding: 8px;
+	font-size: 100%;
+	box-sizing: border-box;
+}
+#pages input[type=submit] {
+	width: 100%;
+	padding: 16px 8px;
+	font-size: 100%;
+}
+#pages select {
+	padding: 8px;
+	font-size: 100%;
+}
+
+/* ------------------------------------------------------------
+メディアクエリー用
+------------------------------------------------------------ */
+@media screen and (max-width: 945px) {
+	#pages dl, #pages dl > dt, #pages dd {
+		display: block;
+	}
+	#pages dl > dt {
+		width: 100%;
+		box-sizing: border-box;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.columnDate {
+		width: auto;
+	}
+}

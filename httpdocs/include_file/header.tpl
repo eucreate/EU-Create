@@ -5,16 +5,18 @@
 <?php
 if ($_SERVER["SCRIPT_NAME"] === "/news.php") {
   $categoryName = "News - ";
+} elseif (isset($categoriesName) && $categoriesName !== "top" && $categoriesName !== "") {
+  $categoryName = " - " . $categoriesTitle;
 } else {
   $categoryName = "";
 }
 ?>
-<title><?php echo $categoryName . $pageTitle . ": " . $siteName; ?></title>
+<title><?php echo $pageTitle . $categoryName . ": " . $siteName; ?></title>
 <meta name="viewport" content="width=device-width">
 <meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="website">
 <meta property="og:title" content="<?php echo $pageTitle . ": " . $siteName; ?>">
-<meta property="og:url" content="http://www.xxx.xxx<?php echo $_SERVER["REQUEST_URI"]; ?>">
+<meta property="og:url" content="https://www.xxx.xxx<?php echo $_SERVER["REQUEST_URI"]; ?>">
 <?php
   if (isset($pagesOgpDescription) && $pagesOgpDescription != "") {
     echo "<meta property=\"og:description\" content=\"" . $pagesOgpDescription . "\">\n";
@@ -22,28 +24,29 @@ if ($_SERVER["SCRIPT_NAME"] === "/news.php") {
     echo "<meta property=\"og:description\" content=\"" . $description . "\">\n";
   }
 ?>
-<meta property="og:image" content="http://www.xxx.xxx/assets/images/common/ogp.png">
+<meta property="og:image" content="https://www.xxx.xxx/assets/images/common/ogp.png">
 <meta property="og:site_name" content="<?php echo htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8'); ?>">
 <meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="/<?php echo $viewPath; ?>/css/common.css" media="all">
+<?php
+date_default_timezone_set('Asia/Tokyo');
+$commonCssFile = '/' . $viewPath . '/css/common.css';
+$commonCssFilePath = '.' . $commonCssFile;
+?>
+<link rel="stylesheet" href="<?php echo $commonCssFile . '?' . date("YmdHis", filemtime($commonCssFilePath)); ?>" media="all">
 <?php if ($_SERVER['SCRIPT_NAME'] === "/contact.php") { ?><link rel="stylesheet" href="/<?php echo $viewPath; ?>/css/style.css" media="all"><?php } ?>
 <?php if ($_SERVER["SERVER_NAME"] === "xxx.xxx" || $_SERVER["SERVER_NAME"] === "www.xxx.xxx") {?>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=xxxxxx"></script>
 <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'xxxxxx']);
-  _gaq.push(['_setDomainName', 'xxx.xxx']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
+  gtag('config', 'xxxxxx');
 </script>
-<?php }
-if ($customHeader != null || $customHeader != "") { echo $customHeader."\n"; } ?>
+<?php } ?>
+<script src="/<?php echo $viewPath; ?>/js/common.js"></script>
+<?php if ($customHeader != null || $customHeader != "") { echo $customHeader."\n"; } ?>
 </head>
 <body>
 <?php if ($backUrlReferer == true ) {
@@ -75,6 +78,26 @@ if ($customHeader != null || $customHeader != "") { echo $customHeader."\n"; } ?
       </div>
       <!-- /#headerUnderInner --></div>
   <!-- /#headerUnder --></div>
+  <div class="headerMenu">
+    <details>
+	<summary>メニュー</summary>
+    <p>テーマ：
+    <label><input type="radio" name="themeMode" value=""> システム</label>
+    <label><input type="radio" name="themeMode" value="オリジナル"> オリジナル</label>
+    <label><input type="radio" name="themeMode" value="ダーク"> ダーク</label>
+    </p>
+    <ul>
+      <li><a href="/production.html">ホームページの制作について</a></li>
+      <li><a href="/coding-rule.html">コーディングルール</a></li>
+      <li><a href="/about.html">EU-Create概要</a></li>
+      <li><a href="/about/law.html">特定商取引法に基づく開示</a></li>
+      <li><a href="/certificate.html">電子証明書について</a></li>
+      <li><a href="/contact.php">お問い合わせ</a></li>
+      <li><a href="https://lin.ee/7MCjQr0"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a></li>
+      <li><a href="/blog/">ブログ</a></li>
+    </ul>
+    </details>
+  </div>
 </header>
 <div id="contents">
 <?php
