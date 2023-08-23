@@ -14,6 +14,11 @@ if ($uaBrowserInfo["type"] === "mobile") {
   mb_http_output("SJIS-win");
   ob_start("mb_output_handler");
   $displayPageType = 2;
+} else {
+  if (empty($_SERVER['HTTPS'])) {
+    header("Location: https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
+    exit;
+  }
 }
 
 $db = new dbc();
@@ -31,4 +36,4 @@ if (count($result) > 0) {
   $pagesContents = "<p>Not Found<br>ページが見つかりませんでした。</p>\n<p><a href=\"/\">" . $siteName . " Front Page</a></p>\n";
 }
 include_once($realPath.$viewDir."/".$fileName."Detail".$viewFileExt);
-$db->Disconnect();
+$db->disconnect();

@@ -75,9 +75,9 @@ function newsIndex($recordLimit = 5) {
 	} else {
 		$flag = "WHERE newsPublicFlag = 1 ";
 	}
-	$getNewsSql = "SELECT * FROM news {$flag}ORDER BY newsModifiedDate LIMIT {$recordLimit}";
+	$getNewsSql = "SELECT * FROM news {$flag}ORDER BY newsModifiedDate DESC LIMIT {$recordLimit}";
 	//var_dump($getNewsSql);
-	$resultNewsSql = $db->getRowOnce($getNewsSql);
+	$resultNewsSql = $db->getRow($getNewsSql);
 	//var_dump($resultNewsSql);
 	if (count($resultNewsSql) > 0) {
 		foreach ($resultNewsSql as $row) {
@@ -89,13 +89,19 @@ function newsIndex($recordLimit = 5) {
 	} else {
 		echo "<p>ニュースはありませんでした。</p>\n";
 	}
-	$db->Disconnect();
+	$db->disconnect();
 }
 
 function wpBlogIndex($recordLimit = 5, $blogTable = "wp_") {
 	$db = new dbc("", "MySQL", "utf8mb4");
+	$blogInfoSql = "SELECT * FROM {$blogTable}options";
+	$resultBlogInfo = $db->getRow($blogInfoSql);
+	$blogDB = array_column($resultBlogInfo, 'option_value');
+	$siteurl = $blogDB[0];
+	$blogname = $blogDB[3];
 	$blogSql = "SELECT * FROM {$blogTable}posts WHERE post_status = 'publish' AND post_type = 'post' ORDER BY post_date DESC LIMIT {$recordLimit}";
-	$resultBlog = $db->getRowOnce($blogSql);
+	$resultBlog = $db->getRow($blogSql);
+	echo "<h3><a href=\"" . $siteurl . "\">" . $blogname . "</a></h3>\n";
 	if (count($resultBlog) > 0) {
 		echo "<dl>\n";
 		foreach ($resultBlog as $row) {
@@ -106,5 +112,5 @@ function wpBlogIndex($recordLimit = 5, $blogTable = "wp_") {
 	} else {
 		echo "<p>ブログはありませんでした。</p>\n";
 	}
-	$db->Disconnect();
+	$db->disconnect();
 }

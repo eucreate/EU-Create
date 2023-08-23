@@ -1,6 +1,20 @@
 <?php
 require_once(dirname(__FILE__).'/include_app/config.php');
+
 require_once($realPath . $rootPath . "include_app/cookieSession.php");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+require('./lib/PHPMailer/PHPMailer.php');
+require('./lib/PHPMailer/Exception.php');
+require('./lib/PHPMailer/SMTP.php');
+
+require './lib/PHPMailer/language/phpmailer.lang-ja.php';
+
+$mail = new PHPMailer(true);
+$mailReturn = new PHPMailer(true);
 
 $fileName = pathinfo(__FILE__, PATHINFO_FILENAME);
 $pageTitle = "お問い合わせ";
@@ -65,15 +79,70 @@ if (isset($_POST['check'], $_SESSION['ticket'], $_POST['ticket']) && $_POST['che
 ".mb_convert_kana(mb_convert_encoding($_POST['message'], "UTF-8", "SJIS-win"), "KV");
 		$from = "From:".mb_encode_mimeheader(mb_convert_encoding($_POST['name'], "UTF-8", "SJIS-win"))."<".$formEmail.">";
 	}
-	if (mb_send_mail($to, $subject, $message, $from, '-f'.$emailAddress)) {
+	// if (mb_send_mail($to, $subject, $message, $from, '-f'.$emailAddress)) {
+	// 	$mailStatus = 1;
+	// } else {
+	// 	$mailStatus = 0;
+	// }
+	$mail->setLanguage('ja', './lib/PHPMailer/language/');
+	try {
+		$mail->isSMTP();
+		$mail->HOST = MAIL_HOST;
+		$mail->SMTPAuth = MAIL_SMTPAUTH;
+		$mail->Username = MAIL_USERNAME; //アカウント名
+		$mail->Password = MAIL_PASSWORD; //アカウントのパスワード
+		$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  // 暗号化を有効に
+		$mail->SMTPOptions = array(
+			'ssl' => array(
+			'verify_peer' => false,
+			'verify_peer_name' => false,
+			'allow_self_signed' => true
+			)
+		);
+		$mail->SMTPSecure = MAIL_SMTPSECURE;  // 暗号化を有効（tls or ssl）無効の場合はfalse
+		$mail->Port = MAIL_PORT;
+		$mail->XMailer = 'EU-Create Form Mail';
+
+		$mail->CharSet = "utf-8";
+    	$mail->Encoding = "base64";
+		$mail->setFrom($formEmail, $_POST['name']);
+		$mail->addAddress($to, 'EU-Create');
+		$mail->Subject = $subject;
+		$mail->Body = $message;
+
+		$mail->Send();
+
 		$mailStatus = 1;
-	} else {
+	} catch (Exception $e) {
+		echo 'メール送信に失敗しました [Error: '.$mail->ErrorInfo.']';
 		$mailStatus = 0;
 	}
+	// ChatWork
+	$token = 'xxxxxxxxxxxxxxxxxx';
+	$room = 'xxxxxxxxx';
+	$cwmsg = "eu-create.netのお問い合わせフォームからお問い合わせがありました。\n";
+	$cwmsg .= "[info][title]お問い合わせ[/title]お問い合わせがありました。\n\n";
+	$cwmsg .= "お名前：{$_POST['name']}
+ふりがな：{$_POST['nameFurigana']}
+メールアドレス：{$formEmail}
+メッセージ：
+{$_POST['message']}";
+	$cwmsg .= "\n\n" . $_SERVER['HTTP_USER_AGENT'];
+	$cwmsg .= "\n" . $_SERVER["REMOTE_ADDR"] . "[/info]";
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_HTTPHEADER,
+		array('X-ChatWorkToken: '.$token));
+	curl_setopt($ch, CURLOPT_URL, "https://api.chatwork.com/v2/rooms/".$room."/messages");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, array('body' => $cwmsg, 'self_unread' => 1));
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$messageId = curl_exec($ch);
+	curl_close($ch);
 	// お問い合わせした方へのメール送信
 	$from = "From:".mb_encode_mimeheader($siteName)."<".$emailAddress.">";
 	$from .= "\nX-Mailer: EU-Create Form Mail";
-	$from .= "\nReturn-Path:" . $emailAddress;
+	$from .= "\nReturn-Path: " . $emailAddress;
 	$to = $_POST['email'];
 	$subject = "お問い合わせを受け付けました";
 	$message = "{$_POST['name']} 様\n\nお問い合わせを受け付けました。\n\n";
@@ -97,7 +166,38 @@ http://{$_SERVER['SERVER_NAME']}/
 メッセージ：
 ".mb_convert_kana(mb_convert_encoding($_POST['message'], "UTF-8", "SJIS-win"), "KV");
 	}
-	mb_send_mail($to, $subject, $message, $from, '-f'.$emailAddress);
+	$pEmailAddress = '-f' . $emailAddress;
+	//mb_send_mail($to, $subject, $message, $from, $pEmailAddress);
+	$mailReturn->setLanguage('ja', './lib/PHPMailer/language/');
+	try {
+		$mailReturn->isSMTP();
+		$mailReturn->HOST = MAIL_HOST;
+		$mailReturn->SMTPAuth = MAIL_SMTPAUTH;
+		$mailReturn->Username = MAIL_USERNAME; //アカウント名
+		$mailReturn->Password = MAIL_PASSWORD; //アカウントのパスワード
+		$mailReturn->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  // 暗号化を有効に
+		$mailReturn->SMTPOptions = array(
+			'ssl' => array(
+			'verify_peer' => false,
+			'verify_peer_name' => false,
+			'allow_self_signed' => true
+			)
+		);
+		$mailReturn->SMTPSecure = MAIL_SMTPSECURE;  // 暗号化を有効（tls or ssl）無効の場合はfalse
+		$mailReturn->Port = MAIL_PORT;
+		$mailReturn->XMailer = 'EU-Create Form Mail';
+
+		$mailReturn->CharSet = "utf-8";
+    	$mailReturn->Encoding = "base64";
+		$mailReturn->setFrom($emailAddress, 'EU-Create');
+		$mailReturn->addAddress($_POST['email'], $_POST['name']);
+		$mailReturn->Subject = $subject;
+		$mailReturn->Body = $message;
+
+		$mailReturn->Send();
+	} catch (Exception $e) {
+		echo 'メール送信に失敗しました [Error: '.$mailReturn->ErrorInfo.']';
+	}
 	$_SESSION['mailStatus'] = $mailStatus;
 	$url = "/contactFin.php";
 	if ($urlSessionSet != "") {

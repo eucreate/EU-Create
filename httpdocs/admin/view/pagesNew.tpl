@@ -10,6 +10,16 @@ include_once($realPath . "include_file/admin/side.tpl"); ?>
 	</select></dd>
 </dl>
 <dl>
+	<dt>言語</dt>
+	<dd>
+	<select name="langID">
+		<option value="0"<?php if (isset($_POST["langID"]) && $_POST["langID"] == 0) { echo " selected"; } ?>>日本語</option>
+		<option value="1"<?php if (isset($_POST["langID"]) && $_POST["langID"] == 1) { echo " selected"; } ?>>英語 (米国)</option>
+		<option value="2"<?php if (isset($_POST["langID"]) && $_POST["langID"] == 2) { echo " selected"; } ?>>中国語（簡体）</option>
+	</select>
+	</dd>
+</dl>
+<dl>
 	<dt>カテゴリー名</dt>
 	<dd><select name="pagesCategoryID">
 	<?php foreach($categoriesResult as $row) {

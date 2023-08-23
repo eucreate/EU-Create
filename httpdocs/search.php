@@ -48,7 +48,7 @@ if (isset($_POST["words"]) && $_POST["words"] != "") {
   $getSearchParam = array();
   $getSearchParam = array_merge($getSearchParam, $paramKeywords);
   $result = $db->getRow($getSearchSql, $getSearchParam);
-  $db->Disconnect();
+  $db->disconnect();
 } else {
   $pageTitle = "検索結果";
 }

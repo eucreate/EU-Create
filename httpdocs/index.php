@@ -65,4 +65,4 @@ if (count($result) > 0) {
 }
 
 include_once($realPath.$viewDir."/".$fileName.$viewFileExt);
-$db->Disconnect();
+$db->disconnect();
