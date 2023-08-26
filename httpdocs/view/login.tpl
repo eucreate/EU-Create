@@ -5,7 +5,7 @@
 	  <dt>ID</dt>
 	  <dd><input type="text" name="id" pattern="^[0-9a-zA-Z\-\_]+$" placeholder="半角英数とハイフン、アンダースコアのみ入力できます" required class="form-control"></dd>
 	  <dt>Password</dt>
-	  <dd><input type="password" name="pass" class="form-control"></dd>
+	  <dd><input type="password" name="pass" class="form-control" required></dd>
 	  <dd><input type="submit" value="send" class="btn btn-primary"></dd>
 	</dl>
 	<p>※COOKIEを有効にしてください。</p>

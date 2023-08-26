@@ -29,7 +29,7 @@ $status = "";
 if (isset($_SESSION["USERID"])) {
 	$db->disconnect();
 }
-if (isset($_GET["status"]) && $_GET["status"] === 1) {
+if (isset($_GET["status"]) && (int)$_GET["status"] === 1) {
 	$status = "Logged out.";
 }
 if (isset($_POST["id"], $_POST["pass"]) && strlen($_POST["id"]) > 0 && strlen($_POST["pass"]) > 0 ) {
@@ -38,17 +38,11 @@ if (isset($_POST["id"], $_POST["pass"]) && strlen($_POST["id"]) > 0 && strlen($_
 	} else {
 		$formname = $_POST["id"];
 	}
-	$formpass = hash("sha512", $_POST["pass"]);
-	for ($i=0; $i<XXX; $i++) { // XXX is the hash stretching count
-		$formpass = hash("Hash algorithm", $formpass);
-	}
-	$sql = "SELECT * FROM users WHERE name = ? AND password = ?";
-	$sqlParam = array($formname, $formpass);
-	$rowSql = "SELECT COUNT(*) FROM users WHERE name = ? AND password = ?";
+	$sql = "SELECT * FROM users WHERE name = ?";
+	$sqlParam = array($formname);
 	// Read database tables
 	$result = $db->getRow($sql, $sqlParam);
-	$rows = $db->getRow($rowSql, $sqlParam);
-	if ($rows > 0) {
+	if (!empty($result) && password_verify($_POST["pass"], $result[0]["password"])) {
 		foreach($result as $row) {
 			$userId = $row["id"];
 		}
